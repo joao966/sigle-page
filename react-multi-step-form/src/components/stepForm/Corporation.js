@@ -20,32 +20,32 @@ export const Corporation = ({ formData, setForm, navigation }) => {
     uf } = formData;
 
     const handleClick = async () => {
-      const resultCep =await requisitionCep();
+    const resultCep =await requisitionCep();
       // const resultCnpj = await requisitionCnpj(); // depende do cors para rodar
 
-      if(resultCep.erro) {
-        return toast.error('CEP inválido')
-      } 
+    if(resultCep.erro) {
+      return toast.error('CEP inválido')
+    } 
 
       // depende o cors para rodar
       // if(resultCnpj.cnpj !== cnpj) {
       //   return toast.error(resultCnpj.message);
       // } 
 
-      if(!cnpj,
-        !cep,
-        !uf,
-        !nome_empresa,
-        !razao_social,
-        !endereco,
-        !numero,
-        !complemento,
-        !bairro,
-        !cidade) {
-        return toast.error('preencha todos os campos');
-      }
+    if(!cnpj,
+      !cep,
+      !uf,
+      !nome_empresa,
+      !razao_social,
+      !endereco,
+      !numero,
+      !complemento,
+      !bairro,
+      !cidade) {
+      return toast.error('preencha todos os campos');
+    }
 
-      return navigation.next();
+    return navigation.next();
   }
   
   return (
