@@ -1,0 +1,13 @@
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.table {
+  border: 1px solid black;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
