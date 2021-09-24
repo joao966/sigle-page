@@ -46,7 +46,8 @@ export const Personal = ({ formData, setForm, navigation }) => {
         autoComplete="off"
         fullWidth
       />
-      <TextField
+      <InputMask
+        mask="+99-(99) 99999-9999"
         label="telefone"
         name="telefone"
         value={telefone}

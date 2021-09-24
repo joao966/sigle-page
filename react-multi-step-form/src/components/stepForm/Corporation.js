@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import InputMask from 'react-input-mask';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import context from '../../context/contex'
 
 export const Corporation = ({ formData, setForm, navigation }) => {
+  const {requisitionCep, /*requisitionCnpj depende do cors para rodar*/} = useContext(context);
   const { cnpj,
     nome_empresa,
     razao_social,
@@ -16,39 +19,40 @@ export const Corporation = ({ formData, setForm, navigation }) => {
     cidade,
     uf } = formData;
 
-  const handleClick = () => {
-    if(!cnpj,
-      !cep,
-      !uf,
-      !nome_empresa,
-      !razao_social,
-      !endereco,
-      !numero,
-      !complemento,
-      !bairro,
-      !cidade) {
-      return toast.error('preencha todos os campos');
-    }
+    const handleClick = async () => {
+      const resultCep =await requisitionCep();
+      // const resultCnpj = await requisitionCnpj(); // depende do cors para rodar
 
-    if(cnpj.length !== 14) {
-      return toast.error('cnpj inválido')
-    }
+      if(resultCep.erro) {
+        return toast.error('CEP inválido')
+      } 
 
-    if(cep.length !== 8) {
-      return toast.error('cep inválido')
-    }
+      // depende o cors para rodar
+      // if(resultCnpj.cnpj !== cnpj) {
+      //   return toast.error(resultCnpj.message);
+      // } 
 
-    if(uf.length !== 2) {
-      return toast.error('uf inválido')
-    }
+      if(!cnpj,
+        !cep,
+        !uf,
+        !nome_empresa,
+        !razao_social,
+        !endereco,
+        !numero,
+        !complemento,
+        !bairro,
+        !cidade) {
+        return toast.error('preencha todos os campos');
+      }
 
-    return navigation.next();
+      return navigation.next();
   }
   
   return (
     <Container maxWidth="xs">
       <h3>Dados da Empresa</h3>
-      <TextField
+      <InputMask
+        mask="99.999.999/9999-99"
         label="cnpj"
         name="cnpj"
         value={cnpj}
@@ -78,7 +82,8 @@ export const Corporation = ({ formData, setForm, navigation }) => {
         autoComplete="off"
         fullWidth
       />
-      <TextField
+      <InputMask
+        mask="99999-999"
         label="cep"
         name="cep"
         value={cep}
@@ -138,7 +143,8 @@ export const Corporation = ({ formData, setForm, navigation }) => {
         autoComplete="off"
         fullWidth
       />
-      <TextField
+      <InputMask
+        mask="aa"
         label="uf"
         name="uf"
         value={uf}

@@ -11,3 +11,10 @@ body {
   flex-direction: column;
   text-align: center;
 }
+
+.corporation input {
+  width: 150px;
+  height: 30px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+}
